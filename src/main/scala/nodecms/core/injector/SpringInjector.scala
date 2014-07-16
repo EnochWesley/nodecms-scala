@@ -17,6 +17,10 @@ class SpringInjector(system: ExtendedActorSystem)
   injector.load(getSpringConfig)
   injector.refresh()
 
+  system.registerOnTermination {
+    injector.close()
+  }
+
   override def getInstance[T](clazz: Class[T]): T = {
     injector.getBean(clazz)
   }
