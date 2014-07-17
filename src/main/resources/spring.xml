@@ -18,5 +18,16 @@
     <property name="password" value="${jdbc.password}"/>
   </bean>
   <context:property-placeholder location="classpath:jdbc.properties"/>
+
+  <bean id="slickConfig" class="nodecms.core.entity.SlickConfig">
+    <constructor-arg name="profileClass" value="${slick.profile}"/>
+    <constructor-arg name="tablePrefix" value="${nodecms.tablePrefix}"/>
+    <constructor-arg name="dynamicAccess" ref="nodeDynamicAccess"/>
+    <constructor-arg name="dataSource" ref="dataSource"/>
+  </bean>
+  
+  <bean id="nodeCmsTable" class="nodecms.core.entity.Tables">
+    <constructor-arg name="config" ref="slickConfig"/>
+  </bean>
 </beans>
 
